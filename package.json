@@ -1,0 +1,24 @@
+{
+  "name": "prospectaai",
+  "version": "1.0.0",
+  "description": "Um CRM e controlado de prospecção e vendas leve, simples e direto ao ponto.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheushnascimento/prospectaai.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matheushnascimento/prospectaai/issues"
+  },
+  "homepage": "https://github.com/matheushnascimento/prospectaai#readme",
+  "dependencies": {
+    "next": "^15.5.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}
