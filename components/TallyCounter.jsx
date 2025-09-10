@@ -17,20 +17,40 @@ export default function TallyCounter({ updateValue, title }) {
     },
   };
 
+  const styles = {
+    button: {
+      padding: "1rem",
+      borderRadius: "100%",
+      width: "4rem",
+      height: "4rem",
+      backgroundColor: "#333",
+      color: "white",
+      border: "none",
+    },
+  };
   return (
     <div
       style={{
-        width: "10rem",
-        maxWidth: "50%",
-        display: "flex",
-        justifyContent: "space-between",
+        textAlign: "center",
       }}
     >
-      <button onClick={handleClick.decrementCount}>-</button>
-      <span htmlFor={title}>
-        {title}: {count}
-      </span>
-      <button onClick={handleClick.incrementCount}>+</button>
+      <span htmlFor={title}>{title}</span>
+      <div
+        style={{
+          display: "flex",
+          gap: "1rem",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <button style={styles.button} onClick={handleClick.decrementCount}>
+          -
+        </button>
+        {count}
+        <button style={styles.button} onClick={handleClick.incrementCount}>
+          +
+        </button>
+      </div>
     </div>
   );
 }
