@@ -10,13 +10,13 @@ export default function App() {
 
   const updateMetric = {
     updateProspects: () => {
-      setProspects(prevValue => prevValue + 1);
+      setProspects((prevValue) => prevValue + 1);
     },
     updateLeads: () => {
-      setLeads(prevValue => prevValue + 1);
+      setLeads((prevValue) => prevValue + 1);
     },
     updateCustomers: () => {
-      setCustomers(prevValue => prevValue + 1);
+      setCustomers((prevValue) => prevValue + 1);
     },
   };
 
@@ -51,15 +51,15 @@ export default function App() {
       >
         <p>{date}</p>
         <TallyCounter
-          updateValue={newValue => updateMetric.updateProspects(newValue)}
+          updateValue={(newValue) => updateMetric.updateProspects(newValue)}
           title="Prospectos"
         />
         <TallyCounter
-          updateValue={newValue => updateMetric.updateLeads(newValue)}
+          updateValue={(newValue) => updateMetric.updateLeads(newValue)}
           title="Leads"
         />
         <TallyCounter
-          updateValue={newValue => updateMetric.updateCustomers(newValue)}
+          updateValue={(newValue) => updateMetric.updateCustomers(newValue)}
           title="Clientes"
         />
       </div>

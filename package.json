@@ -4,7 +4,9 @@
   "description": "Um CRM e controlado de prospecção e vendas leve, simples e direto ao ponto.",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "lint:prettier:check": "prettier --check .",
+    "lint:prettier:fix": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   "homepage": "https://github.com/matheushnascimento/prospectaai#readme",
   "dependencies": {
     "next": "^15.5.2",
+    "prettier": "^3.6.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   }
