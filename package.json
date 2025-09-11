@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/matheushnascimento/prospectaai#readme",
   "dependencies": {
+    "jest": "^30.1.3",
     "next": "^15.5.2",
     "prettier": "^3.6.2",
     "react": "^19.1.1",
