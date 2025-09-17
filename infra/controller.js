@@ -1,7 +1,30 @@
 import * as cookie from "cookie";
+import {
+  InternalServerError,
+  MethodNotAllowedError,
+  NotFoundError,
+  UnauthorizedError,
+  ValidationError,
+} from "infra/errors";
 
 function onNoMatchHandler(request, response) {
   const publicErrorObject = new MethodNotAllowedError();
+  response.status(publicErrorObject.statusCode).json(publicErrorObject);
+}
+function onErrorHandler(error, request, response) {
+  if (error instanceof ValidationError || error instanceof NotFoundError) {
+    return response.status(error.statusCode).json(error);
+  }
+
+  if (error instanceof UnauthorizedError) {
+    clearSessionCookie(response);
+    return response.status(error.statusCode).json(error);
+  }
+
+  const publicErrorObject = new InternalServerError({
+    cause: error,
+  });
+  console.log(publicErrorObject);
   response.status(publicErrorObject.statusCode).json(publicErrorObject);
 }
 
@@ -26,6 +49,7 @@ async function clearSessionCookie(response) {
 const controller = {
   errorHandlers: {
     onNoMatch: onNoMatchHandler,
+    onError: onErrorHandler,
   },
   setSessionCookie,
   clearSessionCookie,
