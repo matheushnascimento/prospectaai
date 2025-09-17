@@ -16,7 +16,8 @@
     "posttest": "npm run services:stop",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
-    "lint:eslint:check": "next lint --dir ."
+    "lint:eslint:check": "next lint --dir .",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,8 @@
   },
   "homepage": "https://github.com/matheushnascimento/prospectaai#readme",
   "dependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "async-retry": "^1.3.3",
     "concurrently": "^9.2.1",
     "cookie": "^1.0.2",
@@ -45,6 +48,7 @@
   "devDependencies": {
     "eslint": "9.35.0",
     "eslint-config-next": "15.5.3",
+    "husky": "^9.1.7",
     "jest": "^30.1.3",
     "prettier": "^3.6.2"
   }
