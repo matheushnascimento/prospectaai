@@ -1,4 +1,5 @@
 //#region imports
+import migrator from "models/migrator";
 import retry from "async-retry";
 import database from "infra/database";
 //#endregion
@@ -25,9 +26,14 @@ async function clearDatabase() {
   await database.query("DROP schema public cascade; create schema public;");
 }
 
+async function runPendingMigrations() {
+  await migrator.runPendingMigrations();
+}
+
 const orchestrator = {
   clearDatabase,
   waitForAllServices,
+  runPendingMigrations,
 };
 
 export default orchestrator;
