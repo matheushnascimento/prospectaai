@@ -1,6 +1,8 @@
 //#region imports
-import {version as uuidVersion} from "uuid";
+import { version as uuidVersion } from "uuid";
 import orchestrator from "tests/orchestrator";
+import user from "models/user";
+import password from "models/password";
 //#endregion
 
 beforeAll(async () => {
@@ -40,6 +42,20 @@ describe("POST to /api/v1/users", () => {
       expect(uuidVersion(responseBody.id)).toBe(4);
       expect(Date.parse(responseBody.created_at)).not.toBeNaN();
       expect(Date.parse(responseBody.updated_at)).not.toBeNaN();
+
+      const userInDatabase = await user.findOneByUsername("username");
+
+      const correctPasswordMatch = await password.compare(
+        "senha123",
+        userInDatabase.password,
+      );
+      const incorrectPasswordMatch = await password.compare(
+        "senhaErrada",
+        userInDatabase.password,
+      );
+
+      expect(correctPasswordMatch).toEqual(true);
+      expect(incorrectPasswordMatch).toEqual(false);
     });
   });
 });
