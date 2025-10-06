@@ -57,5 +57,79 @@ describe("POST to /api/v1/users", () => {
       expect(correctPasswordMatch).toEqual(true);
       expect(incorrectPasswordMatch).toEqual(false);
     });
+    test("With duplicate 'username'", async () => {
+      const response1 = await fetch("http://localhost:3000/api/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "duplicatedUsername1",
+          email: "duplicated@username.com",
+          password: "senha123",
+        }),
+      });
+
+      expect(response1.status).toBe(201);
+
+      const response2 = await fetch("http://localhost:3000/api/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "duplicatedUsername1",
+          email: "duplicated2@username.com",
+          password: "senha123",
+        }),
+      });
+
+      const response2Body = await response2.json();
+
+      expect(response2.status).toBe(400);
+      expect(response2Body).toEqual({
+        name: "ValidationError",
+        message: "O username informado já está sendo utilizado",
+        action: "Utilize outro username para realizar esta operação",
+        status_code: 400,
+      });
+    });
+    test("With duplicate 'email'", async () => {
+      const response1 = await fetch("http://localhost:3000/api/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "duplicatedEmail1",
+          email: "duplicated@email.com",
+          password: "senha123",
+        }),
+      });
+
+      expect(response1.status).toBe(201);
+
+      const response2 = await fetch("http://localhost:3000/api/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "duplicatedEmail2",
+          email: "duplicated@email.com",
+          password: "senha123",
+        }),
+      });
+
+      const response2Body = await response2.json();
+
+      expect(response2.status).toBe(400);
+      expect(response2Body).toEqual({
+        name: "ValidationError",
+        message: "O email informado já está sendo utilizado",
+        action: "Utilize outro email para realizar esta operação",
+        status_code: 400,
+      });
+    });
   });
 });
