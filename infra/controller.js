@@ -6,6 +6,7 @@ import {
   UnauthorizedError,
   ValidationError,
 } from "infra/errors";
+import session from "models/session";
 
 function onNoMatchHandler(request, response) {
   const publicErrorObject = new MethodNotAllowedError();
@@ -24,7 +25,6 @@ function onErrorHandler(error, request, response) {
   const publicErrorObject = new InternalServerError({
     cause: error,
   });
-  console.log(publicErrorObject);
   response.status(publicErrorObject.statusCode).json(publicErrorObject);
 }
 

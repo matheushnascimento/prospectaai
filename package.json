@@ -51,6 +51,7 @@
     "uuid": "11.1.0"
   },
   "devDependencies": {
+    "set-cookie-parser": "^2.7.1",
     "eslint": "9.35.0",
     "eslint-config-next": "15.5.3",
     "husky": "^9.1.7",

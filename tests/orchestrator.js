@@ -1,7 +1,8 @@
 //#region imports
-import migrator from "models/migrator";
 import retry from "async-retry";
 import database from "infra/database";
+import migrator from "models/migrator";
+import session from "models/session";
 import user from "models/user";
 import { faker } from "@faker-js/faker";
 //#endregion
@@ -36,12 +37,16 @@ async function createUser(userObject) {
     password: userObject?.password || "validPassword",
   });
 }
+async function createSession(userId) {
+  return await session.create(userId);
+}
 
 const orchestrator = {
   clearDatabase,
   waitForAllServices,
   runPendingMigrations,
   createUser,
+  createSession,
 };
 
 export default orchestrator;
