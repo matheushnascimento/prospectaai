@@ -7,6 +7,8 @@ import user from "models/user";
 import { faker } from "@faker-js/faker";
 //#endregion
 
+const emailHttpUrl = `http://${process.env.EMAIL_HTTP_HOST}:${process.env.EMAIL_HTTP_PORT}`;
+
 async function waitForAllServices() {
   await waitForWebServer();
 }
@@ -26,6 +28,25 @@ async function waitForWebServer() {
 async function clearDatabase() {
   await database.query("DROP schema public cascade; create schema public;");
 }
+async function deleteAllEmails() {
+  await fetch(`${emailHttpUrl}/messages`, {
+    method: "DELETE",
+  });
+}
+async function getLastEmail() {
+  const emailListResponse = await fetch(`${emailHttpUrl}/messages`);
+  const emailListBody = await emailListResponse.json();
+  const lastEmailItem = emailListBody.pop();
+
+  const emailTextResponse = await fetch(
+    `${emailHttpUrl}/messages/${lastEmailItem.id}.plain`,
+  );
+
+  const emailTextBody = await emailTextResponse.text();
+
+  lastEmailItem.text = emailTextBody;
+  return lastEmailItem;
+}
 async function runPendingMigrations() {
   await migrator.runPendingMigrations();
 }
@@ -43,10 +64,12 @@ async function createSession(userId) {
 
 const orchestrator = {
   clearDatabase,
+  deleteAllEmails,
   waitForAllServices,
   runPendingMigrations,
   createUser,
   createSession,
+  getLastEmail,
 };
 
 export default orchestrator;

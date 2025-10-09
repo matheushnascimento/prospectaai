@@ -44,6 +44,7 @@
     "next": "^15.5.2",
     "next-connect": "^1.0.0",
     "node-pg-migrate": "7.6.1",
+    "nodemailer": "^7.0.9",
     "pg": "^8.16.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -51,11 +52,11 @@
     "uuid": "11.1.0"
   },
   "devDependencies": {
-    "set-cookie-parser": "^2.7.1",
     "eslint": "9.35.0",
     "eslint-config-next": "15.5.3",
     "husky": "^9.1.7",
     "jest": "^30.1.3",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "set-cookie-parser": "^2.7.1"
   }
 }
